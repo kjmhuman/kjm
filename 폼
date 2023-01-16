@@ -48,6 +48,9 @@ namespace databases001
             this.co_humen = new System.Windows.Forms.ColumnHeader();
             this.co_date = new System.Windows.Forms.ColumnHeader();
             this.button3 = new System.Windows.Forms.Button();
+            this.ip_txt = new System.Windows.Forms.TextBox();
+            this.server_txt = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // la_primary
@@ -156,26 +159,29 @@ namespace databases001
             listViewGroup4});
             this.listView1.Location = new System.Drawing.Point(20, 160);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(484, 278);
+            this.listView1.Size = new System.Drawing.Size(484, 184);
             this.listView1.TabIndex = 11;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
             // co_primary
             // 
-            this.co_primary.Text = "co_primary";
+            this.co_primary.Text = "ISBN";
             this.co_primary.Width = 100;
             // 
             // co_name
             // 
+            this.co_name.Text = "Name";
             this.co_name.Width = 100;
             // 
             // co_humen
             // 
+            this.co_humen.Text = "Author";
             this.co_humen.Width = 100;
             // 
             // co_date
             // 
+            this.co_date.Text = "Date";
             this.co_date.Width = 100;
             // 
             // button3
@@ -188,11 +194,38 @@ namespace databases001
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // ip_txt
+            // 
+            this.ip_txt.Location = new System.Drawing.Point(20, 367);
+            this.ip_txt.Name = "ip_txt";
+            this.ip_txt.Size = new System.Drawing.Size(373, 23);
+            this.ip_txt.TabIndex = 13;
+            // 
+            // server_txt
+            // 
+            this.server_txt.Location = new System.Drawing.Point(20, 407);
+            this.server_txt.Multiline = true;
+            this.server_txt.Name = "server_txt";
+            this.server_txt.Size = new System.Drawing.Size(484, 105);
+            this.server_txt.TabIndex = 14;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(399, 367);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(105, 23);
+            this.button4.TabIndex = 15;
+            this.button4.Text = "연결";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(527, 450);
+            this.ClientSize = new System.Drawing.Size(527, 524);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.server_txt);
+            this.Controls.Add(this.ip_txt);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.txt_date);
@@ -230,5 +263,8 @@ namespace databases001
         private ColumnHeader co_name;
         private ColumnHeader co_humen;
         private ColumnHeader co_date;
+        private TextBox ip_txt;
+        private TextBox server_txt;
+        private Button button4;
     }
 }
