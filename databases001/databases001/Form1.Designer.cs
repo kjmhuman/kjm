@@ -57,7 +57,7 @@
             // primary_la
             // 
             this.primary_la.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.primary_la.Location = new System.Drawing.Point(21, 31);
+            this.primary_la.Location = new System.Drawing.Point(104, 31);
             this.primary_la.Name = "primary_la";
             this.primary_la.Size = new System.Drawing.Size(59, 21);
             this.primary_la.TabIndex = 0;
@@ -67,7 +67,7 @@
             // name_la
             // 
             this.name_la.AutoSize = true;
-            this.name_la.Location = new System.Drawing.Point(41, 63);
+            this.name_la.Location = new System.Drawing.Point(124, 63);
             this.name_la.Name = "name_la";
             this.name_la.Size = new System.Drawing.Size(39, 15);
             this.name_la.TabIndex = 1;
@@ -75,7 +75,7 @@
             // 
             // insert_bt
             // 
-            this.insert_bt.Location = new System.Drawing.Point(263, 31);
+            this.insert_bt.Location = new System.Drawing.Point(346, 31);
             this.insert_bt.Name = "insert_bt";
             this.insert_bt.Size = new System.Drawing.Size(79, 41);
             this.insert_bt.TabIndex = 2;
@@ -85,7 +85,7 @@
             // 
             // update_bt
             // 
-            this.update_bt.Location = new System.Drawing.Point(356, 31);
+            this.update_bt.Location = new System.Drawing.Point(439, 31);
             this.update_bt.Name = "update_bt";
             this.update_bt.Size = new System.Drawing.Size(81, 41);
             this.update_bt.TabIndex = 3;
@@ -95,14 +95,14 @@
             // 
             // name_txt
             // 
-            this.name_txt.Location = new System.Drawing.Point(79, 60);
+            this.name_txt.Location = new System.Drawing.Point(162, 60);
             this.name_txt.Name = "name_txt";
             this.name_txt.Size = new System.Drawing.Size(155, 23);
             this.name_txt.TabIndex = 6;
             // 
             // primary_txt
             // 
-            this.primary_txt.Location = new System.Drawing.Point(79, 31);
+            this.primary_txt.Location = new System.Drawing.Point(162, 31);
             this.primary_txt.Name = "primary_txt";
             this.primary_txt.Size = new System.Drawing.Size(155, 23);
             this.primary_txt.TabIndex = 5;
@@ -110,7 +110,7 @@
             // humen_la
             // 
             this.humen_la.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.humen_la.Location = new System.Drawing.Point(21, 93);
+            this.humen_la.Location = new System.Drawing.Point(104, 91);
             this.humen_la.Name = "humen_la";
             this.humen_la.Size = new System.Drawing.Size(59, 18);
             this.humen_la.TabIndex = 7;
@@ -120,7 +120,7 @@
             // date_la
             // 
             this.date_la.AutoSize = true;
-            this.date_la.Location = new System.Drawing.Point(48, 121);
+            this.date_la.Location = new System.Drawing.Point(131, 121);
             this.date_la.Name = "date_la";
             this.date_la.Size = new System.Drawing.Size(32, 15);
             this.date_la.TabIndex = 8;
@@ -128,14 +128,14 @@
             // 
             // Author_txt
             // 
-            this.Author_txt.Location = new System.Drawing.Point(79, 89);
+            this.Author_txt.Location = new System.Drawing.Point(162, 90);
             this.Author_txt.Name = "Author_txt";
             this.Author_txt.Size = new System.Drawing.Size(155, 23);
             this.Author_txt.TabIndex = 9;
             // 
             // date_txt
             // 
-            this.date_txt.Location = new System.Drawing.Point(79, 118);
+            this.date_txt.Location = new System.Drawing.Point(162, 118);
             this.date_txt.Name = "date_txt";
             this.date_txt.Size = new System.Drawing.Size(155, 23);
             this.date_txt.TabIndex = 10;
@@ -162,7 +162,7 @@
             listViewGroup4});
             this.listView1.Location = new System.Drawing.Point(20, 160);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(484, 184);
+            this.listView1.Size = new System.Drawing.Size(628, 184);
             this.listView1.TabIndex = 11;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -191,7 +191,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(263, 89);
+            this.button3.Location = new System.Drawing.Point(346, 89);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(174, 23);
             this.button3.TabIndex = 12;
@@ -203,7 +203,7 @@
             // 
             this.ip_txt.Location = new System.Drawing.Point(20, 501);
             this.ip_txt.Name = "ip_txt";
-            this.ip_txt.Size = new System.Drawing.Size(373, 23);
+            this.ip_txt.Size = new System.Drawing.Size(477, 23);
             this.ip_txt.TabIndex = 13;
             this.ip_txt.Text = "192.168.201.73";
             // 
@@ -214,12 +214,12 @@
             this.server_txt.Name = "server_txt";
             this.server_txt.ReadOnly = true;
             this.server_txt.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.server_txt.Size = new System.Drawing.Size(484, 105);
+            this.server_txt.Size = new System.Drawing.Size(628, 105);
             this.server_txt.TabIndex = 14;
             // 
             // con_bt
             // 
-            this.con_bt.Location = new System.Drawing.Point(410, 501);
+            this.con_bt.Location = new System.Drawing.Point(554, 501);
             this.con_bt.Name = "con_bt";
             this.con_bt.Size = new System.Drawing.Size(94, 23);
             this.con_bt.TabIndex = 15;
@@ -229,7 +229,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(263, 118);
+            this.button1.Location = new System.Drawing.Point(346, 118);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(174, 23);
             this.button1.TabIndex = 16;
@@ -243,7 +243,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(527, 543);
+            this.ClientSize = new System.Drawing.Size(688, 543);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.con_bt);
             this.Controls.Add(this.server_txt);

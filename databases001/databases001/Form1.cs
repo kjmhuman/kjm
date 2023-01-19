@@ -48,7 +48,7 @@ namespace databases001
                     using (var cmd = new NpgsqlCommand())
                     {
                         cmd.Connection = conn;
-                        cmd.CommandText = "select * from book order by name asc";
+                        cmd.CommandText = "select * from book order by date asc";
 
                         using (var reader = cmd.ExecuteReader())
                         {
@@ -225,14 +225,14 @@ namespace databases001
                         if (connMode == 1)
                         {
                             cmd.Connection = conn;
-                            cmd.CommandText = "select * from Book order by name ASC";
+                            cmd.CommandText = "select * from Book order by date ASC";
 
                             Reading_date(cmd);
                         }
                         else if (connMode == 2)
                         {
                             cmd.Connection = conn;
-                            cmd.CommandText = "select * from car order by name ASC";
+                            cmd.CommandText = "select * from car order by date ASC";
 
                             Reading_date(cmd);
                         }
@@ -288,7 +288,7 @@ namespace databases001
                         if (connMode == 1)
                         {
                             cmd.Connection = conn;
-                            cmd.CommandText = "select * from book order by name ASC";
+                            cmd.CommandText = "select * from book order by date ASC";
 
                             Reading_date(cmd); //
                             Success = true; // 접속 완료 체크
@@ -297,7 +297,7 @@ namespace databases001
                         else if (connMode == 2)
                         {
                             cmd.Connection = conn;
-                            cmd.CommandText = "select * from car order by name ASC";
+                            cmd.CommandText = "select * from car order by date ASC";
 
                             Reading_date(cmd); 
                             Success = true; 
@@ -429,7 +429,7 @@ namespace databases001
                 connMode = 2;
                 init_Column();
                 init_txt();
-                commandText = "select * from car order by name ASC ";
+                commandText = "select * from car order by date ASC ";
                 DB_Connection_Reading();
             }
             else if(connMode ==2)
@@ -437,7 +437,7 @@ namespace databases001
                 connMode = 1;
                 init_Column();
                 init_txt();
-                commandText = "select * from book order by name ASC ";
+                commandText = "select * from book order by date ASC ";
                 DB_Connection_Reading();
             }
         }
@@ -567,8 +567,8 @@ namespace databases001
 
         private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)//리스트 뷰 클릭 버튼
         {
-            if (listView1.Sorting == SortOrder.Ascending)
-                listView1.Sorting = SortOrder.Descending;
+            if (listView1.Sorting == SortOrder.Ascending)//오름차
+                listView1.Sorting = SortOrder.Descending;//내림차
             else
                 listView1.Sorting = SortOrder.Ascending;
 
@@ -577,15 +577,10 @@ namespace databases001
         }
     }
 
-    class ListViewItemComparer : IComparer// 리스트 뷰 정렬
+    class ListViewItemComparer : IComparer// 리스트 뷰 정렬시 순서 정의        숫자 1 한글 2 영어 3
     {
-        private int col=0;
+        private int col = 0;
         private SortOrder order;
-        public ListViewItemComparer()
-        {
-
-            order = SortOrder.Ascending;
-        }
         public ListViewItemComparer(int column, SortOrder order)
         {
             col = column;
@@ -593,7 +588,7 @@ namespace databases001
         }
         public int Compare(object x, object y)
         {
-            int returnVal = -1;
+            int returnVal = 0;
             returnVal = String.Compare(((ListViewItem)x).SubItems[col].Text,
                                     ((ListViewItem)y).SubItems[col].Text);
             if (order == SortOrder.Descending)
