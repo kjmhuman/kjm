@@ -12,7 +12,6 @@ C:\Users\jnd\source\repos\databases001\databases001\bin\Debug\net6.0-windows\Zst
 C:\Users\jnd\source\repos\databases001\databases001\bin\Debug\net6.0-windows\BouncyCastle.Crypto.dll
 C:\Users\jnd\source\repos\databases001\databases001\obj\Debug\net6.0-windows\databases001.csproj.AssemblyReference.cache
 C:\Users\jnd\source\repos\databases001\databases001\obj\Debug\net6.0-windows\databases001.Form1.resources
-C:\Users\jnd\source\repos\databases001\databases001\obj\Debug\net6.0-windows\databases001.Form2.resources
 C:\Users\jnd\source\repos\databases001\databases001\obj\Debug\net6.0-windows\databases001.csproj.GenerateResource.cache
 C:\Users\jnd\source\repos\databases001\databases001\obj\Debug\net6.0-windows\databases001.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\jnd\source\repos\databases001\databases001\obj\Debug\net6.0-windows\databases001.AssemblyInfoInputs.cache

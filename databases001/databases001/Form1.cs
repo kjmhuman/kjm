@@ -10,6 +10,7 @@ using System;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Reflection.Metadata;
 using System.Security.Cryptography.X509Certificates;
+using System.Collections;
 
 namespace databases001
 {
@@ -24,6 +25,8 @@ namespace databases001
         string connStart = "Host=192.168.201.151;Username=postgres;Password=12345678;Database=book_car"; //데이터 베이스 주소
         string str_serverURL = "127.0.0.1";//사설 주소
         string str_serverPort = "5555";//사설 포트 번호
+
+        private int sortColumn = -1;
 
         String str_primary = "";
         String str_name = "";
@@ -546,8 +549,7 @@ namespace databases001
                 Console.WriteLine(rearPrimary);
             }
 
-        }
-
+        }  
         private void button1_Click(object sender, EventArgs e)//재시작 버튼
         {
             init_Column();
@@ -555,39 +557,49 @@ namespace databases001
             writeRichTextbox(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss, ") + "새로고침 했습니다. " + " ");
         }
 
-        private void dicon_bt_Click(object sender, EventArgs e)//종료 버튼
-        {
-            
-            if (isconnection == true)
-            {
-                streamWriter.WriteLine("exit");
-            }
-            connect();
-            Form1 form1 = new Form1();
-            this.Close();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            using (var conn = new NpgsqlConnection(connStart))
-            {
-                try
-                {
-                    conn.Close();
-                }
-                catch 
-                {
-                    
-                }
-            }
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)//닫기 버튼
         {
             if (isconnection == true)
             {
                 streamWriter.WriteLine("exit");
             }
         }
+
+        private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)//리스트 뷰 클릭 버튼
+        {
+            if (listView1.Sorting == SortOrder.Ascending)
+                listView1.Sorting = SortOrder.Descending;
+            else
+                listView1.Sorting = SortOrder.Ascending;
+
+            listView1.ListViewItemSorter = new ListViewItemComparer(e.Column, listView1.Sorting);
+
+        }
+    }
+
+    class ListViewItemComparer : IComparer// 리스트 뷰 정렬
+    {
+        private int col=0;
+        private SortOrder order;
+        public ListViewItemComparer()
+        {
+
+            order = SortOrder.Ascending;
+        }
+        public ListViewItemComparer(int column, SortOrder order)
+        {
+            col = column;
+            this.order = order;
+        }
+        public int Compare(object x, object y)
+        {
+            int returnVal = -1;
+            returnVal = String.Compare(((ListViewItem)x).SubItems[col].Text,
+                                    ((ListViewItem)y).SubItems[col].Text);
+            if (order == SortOrder.Descending)
+                returnVal *= -1;
+            return returnVal;
+        }
+
     }
 }
