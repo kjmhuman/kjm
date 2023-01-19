@@ -25,6 +25,11 @@ namespace databases001
         string str_serverURL = "127.0.0.1";//사설 주소
         string str_serverPort = "5555";//사설 포트 번호
 
+        String str_primary = "";
+        String str_name = "";
+        String str_infor = "";
+        String str_date = "";
+
         StreamReader streamReader;   // 데이타 읽기 위한 스트림리더
         StreamWriter streamWriter; // 데이타 쓰기 위한 스트림라이터
 
@@ -72,6 +77,7 @@ namespace databases001
                                     }
                                 }   
                                 init_Column_Size();
+                                DB_Connection_Reading();
                             }
                         }
                     }
@@ -124,19 +130,26 @@ namespace databases001
             {
                 TcpListener tcpListener = new TcpListener(IPAddress.Parse(str_ip), int.Parse(str_port));
                 tcpListener.Start(); // 서버 시작
-                writeRichTextbox("서버 준비...");
+                writeRichTextbox(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,")+"서버 준비..."+"");
 
                 while (true)
                 {
                     isconnection = true;
                     TcpClient tcpClient1 = tcpListener.AcceptTcpClient();
                     writeRichTextbox(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss, ")+ "클라이언트 연결됨"+"");
+                    
                 
 
-                streamReader = new StreamReader(tcpClient1.GetStream());
+                    streamReader = new StreamReader(tcpClient1.GetStream());
                     streamWriter = new StreamWriter(tcpClient1.GetStream());
                     streamWriter.AutoFlush = true;
-
+                    if (ip_txt.InvokeRequired)
+                    {
+                        ip_txt.Invoke(new MethodInvoker(delegate { ip_txt.ReadOnly =true; }));
+                    }
+                    else
+                        ip_txt.ReadOnly = true;
+                    
                     while (isconnection==true)
                     {
                         string receiveData1 = streamReader.ReadLine();
@@ -203,7 +216,6 @@ namespace databases001
             {
                 try
                 {
-
                     conn.Open();
                     using (var cmd = conn.CreateCommand())
                     {
@@ -222,8 +234,6 @@ namespace databases001
                             Reading_date(cmd);
                         }
                     }
-
-
                 }
                 catch (Exception e)
                 {
@@ -300,7 +310,7 @@ namespace databases001
             }
         }
 
-        void DB_InUP(string str_primary, string str_name, string str_infor, string str_date)//데이터 베이스 삽입
+        void DB_In(string str_primary, string str_name, string str_infor, string str_date)//데이터 베이스 삽입
         {
             using (var conn = new NpgsqlConnection(connStart))
             {
@@ -313,18 +323,91 @@ namespace databases001
                         cmd.CommandText = commandText;
 
                         Reading_date(cmd);
-
-                        if (connMode == 1)
+                        if (isconnection)
                         {
-                            commandText = "select * from book";
+                            if (connMode == 1)
+                            {
+                                commandText = "select * from book";
+                                streamWriter.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss, Book: ") + str_primary +
+                                       ", " + str_name + " 의 정보가 추가되었습니다.");
+                            }
+                            else if (connMode == 2)
+                            {
+                                commandText = "select * from car";
+                                streamWriter.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss, Car: ") + str_primary +
+                        ", " + str_name + "  의 정보가 추가되었습니다.");
+                            }
                         }
-                        else if (connMode == 2)
+                        else if(!isconnection)
                         {
-                            commandText = "select * from car";
+                            if (connMode == 1)
+                            {
+                                commandText = "select * from book";
+                            }
+                            else if (connMode == 2)
+                            {
+                                commandText = "select * from car";
+                            }
                         }
                         DB_Connection_Reading();
                         listView1.EnsureVisible(listView1.Items.Count - 1);
                         init_txt();
+                    }
+                }
+                catch (Exception e)
+                {
+                    print_error(e);
+                    init_txt();
+                }
+            }
+        }
+
+        void DB_UP(string str_primary, string str_name, string str_infor, string str_date)//데이터 베이스 삽입
+        {
+            using (var conn = new NpgsqlConnection(connStart))
+            {
+                try
+                {
+                    conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = commandText;
+
+                        Reading_date(cmd);
+                        if (isconnection)
+                        {
+                            if (connMode == 1)
+                            {
+                                commandText = "select * from book";
+                                streamWriter.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss, Book: ") + str_primary +
+                        ", " + str_name + "  의 정보가 변경되었습니다.");
+                            }
+                            else if (connMode == 2)
+                            {
+                                commandText = "select * from car";
+                                streamWriter.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss, Car: ") + str_primary +
+                        ", " + str_name + " 의 정보가 변경되었습니다.");
+                            }
+                            DB_Connection_Reading();
+                            listView1.EnsureVisible(listView1.Items.Count - 1);
+                            init_txt();
+                        }
+                        else if(!isconnection)
+                        {
+                            if (connMode == 1)
+                            {
+                                commandText = "select * from book";
+                            }
+                            else if (connMode == 2)
+                            {
+                                commandText = "select * from car";
+                            }
+                            DB_Connection_Reading();
+                            listView1.EnsureVisible(listView1.Items.Count - 1);
+                            init_txt();
+                        }
+
                     }
 
                 }
@@ -364,10 +447,10 @@ namespace databases001
                 return;
             }
 
-            String str_primary = primary_txt.Text;
-            String str_name = name_txt.Text;
-            String str_infor = Author_txt.Text;
-            String str_date = date_txt.Text;
+            str_primary = primary_txt.Text;
+            str_name = name_txt.Text;
+            str_infor = Author_txt.Text;
+            str_date = date_txt.Text;
 
             if (primary_txt.Text.Equals("") || name_txt.Text.Equals("") || Author_txt.Text.Equals("") || date_txt.Text.Equals(""))
             {
@@ -383,9 +466,7 @@ namespace databases001
                                 "', '" + str_infor +
                                 "', '" + str_date + "')";
                 Console.WriteLine(commandText);
-                DB_InUP(str_primary, str_name, str_infor, str_date);
-                streamWriter.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss, Book: ") + str_primary +
-                                    ", " + str_name + " 의 정보가 추가되었습니다.");
+                DB_In(str_primary, str_name, str_infor, str_date);   
             }
             else if (connMode == 2)
             {
@@ -394,9 +475,7 @@ namespace databases001
                                 "', '" + str_infor +
                                 "', '" + str_date + "')";
                 Console.WriteLine(commandText);
-                DB_InUP(str_primary, str_name, str_infor, str_date);
-                streamWriter.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss, Car: ") + str_primary +
-                                    ", " + str_name + "  의 정보가 추가되었습니다.");
+                DB_In(str_primary, str_name, str_infor, str_date);
             }
         }
 
@@ -408,10 +487,10 @@ namespace databases001
                 return;
             }
 
-            String str_primary = primary_txt.Text;
-            String str_name = name_txt.Text;
-            String str_infor = Author_txt.Text;
-            String str_date = date_txt.Text;
+            str_primary = primary_txt.Text;
+            str_name = name_txt.Text;
+            str_infor = Author_txt.Text;
+            str_date = date_txt.Text;
 
            
             if (primary_txt.Text.Equals("") || name_txt.Text.Equals("") || Author_txt.Text.Equals("") || date_txt.Text.Equals(""))
@@ -427,9 +506,7 @@ namespace databases001
                                 "', author = '" + str_infor +
                                 "', date = '" + str_date + "' where isbn = " + rearPrimary;
                 Console.WriteLine(commandText);
-                DB_InUP(str_primary, str_name, str_infor, str_date);
-                streamWriter.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss, Book: ") + str_primary +
-                                    ", " + str_name + "  의 정보가 변경되었습니다.");
+                DB_UP(str_primary, str_name, str_infor, str_date);
             }
             else if (connMode == 2)
             {
@@ -438,13 +515,10 @@ namespace databases001
                                 "', company = '" + str_infor +
                                 "', date = '" + str_date + "' where number = '" + rearPrimary + "'";
                 Console.WriteLine(commandText);
-                DB_InUP(str_primary, str_name, str_infor, str_date);
-                streamWriter.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss, Car: ") + str_primary +
-                                    ", " + str_name + " 의 정보가 변경되었습니다.");
+                DB_UP(str_primary, str_name, str_infor, str_date);
             }
 
         }
-
 
         private void con_bt_Click(object sender, EventArgs e)//연결 버튼
         {
@@ -478,16 +552,42 @@ namespace databases001
         {
             init_Column();
             init_txt();
+            writeRichTextbox(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss, ") + "새로고침 했습니다. " + " ");
         }
 
         private void dicon_bt_Click(object sender, EventArgs e)//종료 버튼
         {
-            Form1 form1 = new Form1();
+            
             if (isconnection == true)
             {
-                isconnection= false;                
+                streamWriter.WriteLine("exit");
             }
+            connect();
+            Form1 form1 = new Form1();
             this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using (var conn = new NpgsqlConnection(connStart))
+            {
+                try
+                {
+                    conn.Close();
+                }
+                catch 
+                {
+                    
+                }
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isconnection == true)
+            {
+                streamWriter.WriteLine("exit");
+            }
         }
     }
 }

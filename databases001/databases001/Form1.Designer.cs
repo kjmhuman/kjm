@@ -52,7 +52,6 @@
             this.server_txt = new System.Windows.Forms.TextBox();
             this.con_bt = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.dicon_bt = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // primary_la
@@ -78,7 +77,7 @@
             // 
             this.insert_bt.Location = new System.Drawing.Point(164, 31);
             this.insert_bt.Name = "insert_bt";
-            this.insert_bt.Size = new System.Drawing.Size(75, 41);
+            this.insert_bt.Size = new System.Drawing.Size(79, 41);
             this.insert_bt.TabIndex = 2;
             this.insert_bt.Text = "입력";
             this.insert_bt.UseVisualStyleBackColor = true;
@@ -86,9 +85,9 @@
             // 
             // update_bt
             // 
-            this.update_bt.Location = new System.Drawing.Point(263, 31);
+            this.update_bt.Location = new System.Drawing.Point(257, 31);
             this.update_bt.Name = "update_bt";
-            this.update_bt.Size = new System.Drawing.Size(75, 41);
+            this.update_bt.Size = new System.Drawing.Size(81, 41);
             this.update_bt.TabIndex = 3;
             this.update_bt.Text = "수정";
             this.update_bt.UseVisualStyleBackColor = true;
@@ -237,24 +236,13 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // dicon_bt
-            // 
-            this.dicon_bt.Location = new System.Drawing.Point(410, 530);
-            this.dicon_bt.Name = "dicon_bt";
-            this.dicon_bt.Size = new System.Drawing.Size(94, 23);
-            this.dicon_bt.TabIndex = 17;
-            this.dicon_bt.Text = "종료";
-            this.dicon_bt.UseVisualStyleBackColor = true;
-            this.dicon_bt.Click += new System.EventHandler(this.dicon_bt_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(527, 563);
-            this.Controls.Add(this.dicon_bt);
+            this.ClientSize = new System.Drawing.Size(527, 543);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.con_bt);
             this.Controls.Add(this.server_txt);
@@ -273,6 +261,7 @@
             this.Controls.Add(this.primary_la);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -300,6 +289,5 @@
         private TextBox server_txt;
         private Button con_bt;
         private Button button1;
-        private Button dicon_bt;
     }
 }
