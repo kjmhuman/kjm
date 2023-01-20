@@ -26,8 +26,6 @@ namespace databases001
         string str_serverURL = "127.0.0.1";//사설 주소
         string str_serverPort = "5555";//사설 포트 번호
 
-        private int sortColumn = -1;
-
         String str_primary = "";
         String str_name = "";
         String str_infor = "";
@@ -137,12 +135,9 @@ namespace databases001
 
                 while (true)
                 {
-                    isconnection = true;
                     TcpClient tcpClient1 = tcpListener.AcceptTcpClient();
                     writeRichTextbox(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss, ")+ "클라이언트 연결됨"+"");
                     
-                
-
                     streamReader = new StreamReader(tcpClient1.GetStream());
                     streamWriter = new StreamWriter(tcpClient1.GetStream());
                     streamWriter.AutoFlush = true;
@@ -153,8 +148,9 @@ namespace databases001
                     else
                         ip_txt.ReadOnly = true;
                     
-                    while (isconnection==true)
+                    while (true)
                     {
+                        isconnection = true;
                         string receiveData1 = streamReader.ReadLine();
                         if (receiveData1 == null || receiveData1.Equals("exit"))
                         {
@@ -417,7 +413,6 @@ namespace databases001
                 catch (Exception e)
                 {
                     print_error(e);
-                    init_txt();
                 }
             }
         }
@@ -550,7 +545,7 @@ namespace databases001
             }
 
         }  
-        private void button1_Click(object sender, EventArgs e)//재시작 버튼
+        private void button1_Click(object sender, EventArgs e)//새로고침 버튼
         {
             init_Column();
             init_txt();
